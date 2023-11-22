@@ -37,5 +37,27 @@
     </p>
 </div>
 
+<div class="social">
+    <ul>
+        <li class="facebook">
+            <a href="{% url "social:begin" "facebook" %}">
+                Acceder con Facebook
+            </a>
+        </li>
+        <li class="twitter">
+            <a href="{% url "social:begin" "twitter" %}">
+                Acceder con Twitter
+            </a>
+        </li>
+        <li class="google">
+            <a href="{% url "social:begin" "google-oauth2" %}">
+                Acceder con Google
+            </a>
+        </li>
+    </ul>
+    
+
+</div>
+
 {% endblock content %}
 

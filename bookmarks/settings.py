@@ -26,7 +26,11 @@ SECRET_KEY = 'django-insecure-1a5r^2)88(ig*kzjujj56!y_)!)4=l!bf9bgm%qchh)3l^5*z2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'mysite.com',
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -39,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'django_extensions',
     
 ]
 
@@ -133,7 +139,37 @@ LOGOUT_URL = 'logout'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+SOCIAL_AUTH_PIPELINE = [
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'account.authentication.create_profile',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+]
+
+
+
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.google.GoogleOAuth2',
 ]
+
+SOCIAL_AUTH_FACEBOOK_KEY = '874160890701303' # facebook app id
+SOCIAL_AUTH_FACEBOOK_SECRET = 'de14b2874d88e1408f2591650289fa22' # facebook App Secret
+
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email',]
+
+SOCIAL_AUTH_TWITTER_KEY = 'xxx' # API kyer
+SOCIAL_AUTH_TWITTER_SECRET = 'xxx'  # API secret
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '868378042662-b60msoi7deiiad66rnouv6rqgi2arv62.apps.googleusercontent.com' # API kyer
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'  # API secret
